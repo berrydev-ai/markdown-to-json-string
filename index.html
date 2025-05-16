@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Markdown to JSON String</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+      max-width: 800px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 1rem;
+      font-family: monospace;
+    }
+    #output {
+      white-space: pre-wrap;
+      background: #f0f0f0;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      min-height: 100px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Markdown to JSON String</h1>
+
+  <label for="markdown">Enter Markdown:</label>
+  <textarea id="markdown" placeholder="Type your markdown here..."></textarea>
+
+  <button onclick="convert()">Convert</button>
+  <button onclick="copyOutput()">Copy to Clipboard</button>
+
+  <h2>JSON-Compatible String:</h2>
+  <div id="output"></div>
+
+  <script>
+    function convert() {
+      const markdown = document.getElementById("markdown").value;
+      const jsonSafe = JSON.stringify(markdown);
+      // Remove enclosing quotes from JSON.stringify
+      const stripped = jsonSafe.slice(1, -1);
+      document.getElementById("output").textContent = stripped;
+    }
+
+    function copyOutput() {
+      const text = document.getElementById("output").textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+  </script>
+
+</body>
+</html>
